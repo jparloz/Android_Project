@@ -1,0 +1,35 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.project_android.UI.GamesFragment">
+
+    <androidx.appcompat.widget.SearchView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="12dp"
+        android:id="@+id/searchGame"
+        app:iconifiedByDefault="false"
+        app:searchHintIcon="@null"
+        app:queryHint="Game..."
+        android:focusable="false"
+        app:closeIcon="@drawable/baseline_clear_24"
+        app:searchIcon="@drawable/baseline_search_24"
+        android:background="@drawable/searchbkg"
+        tools:ignore="MissingConstraints" />
+    <ListView
+        android:layout_below="@id/searchGame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/listview"
+        android:scrollbars="vertical"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="90dp"
+        tools:listitem="@layout/genre_list"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="15dp"/>
+</RelativeLayout>

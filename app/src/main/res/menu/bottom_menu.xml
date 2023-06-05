@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/bt_home"
+        android:title="Home"
+        android:icon="@drawable/baseline_home_24"/>
+
+    <item
+        android:id="@+id/bt_games"
+        android:title="Games"
+        android:icon="@drawable/baseline_videogame_asset_24"
+        />
+
+    <item
+        android:id="@+id/bt_article"
+        android:title="Articles"
+        android:icon="@drawable/baseline_article_24" />
+    <item
+        android:id="@+id/bt_profile"
+        android:title="Profile"
+        android:icon="@drawable/baseline_profile_24" />
+
+</menu>

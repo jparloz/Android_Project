@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="switchMode" type="id" />
+    <item name="cardTitle" type="id" />
+    <item name="searchArticle" type="id" />
+    <item name="recyclerView" type="id" />
+</resources>

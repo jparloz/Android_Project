@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ScreenBackground"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.project_android.UI.GameDetailFragment">
+
+
+    <ImageView
+        android:id="@+id/gameImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="96dp"
+        android:padding="8dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.061"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/gameRating"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="-27dp"
+        android:layout_marginBottom="404dp"
+        android:text="4.97/5"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/gameMeta"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameImage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/gameMeta"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="244dp"
+        android:layout_marginBottom="404dp"
+        android:text="97/100"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameImage"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/gamePlatform"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="56dp"
+        android:layout_marginBottom="468dp"
+        android:text="PS5, PS4, XBOX ONE, Pc"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gameImage"
+        app:layout_constraintVertical_bias="0.773" />
+
+    <TextView
+        android:id="@+id/gameAge"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginEnd="28dp"
+        android:text="Mature"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/gamePlatform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.952"
+        app:layout_constraintStart_toEndOf="@+id/gameRelease"
+        app:layout_constraintTop_toTopOf="@+id/gameImage"
+        app:layout_constraintVertical_bias="0.567" />
+
+    <TextView
+        android:id="@+id/gameRelease"
+        style="@style/TextColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="28dp"
+        android:text="25/02/2022"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/gamePlatform"
+        app:layout_constraintStart_toEndOf="@+id/gameImage"
+        app:layout_constraintTop_toTopOf="@+id/gameImage"
+        app:layout_constraintVertical_bias="0.567" />
+
+    <TextView
+        android:id="@+id/gameGenres"
+        style="@style/TextColor"
+        android:layout_width="160dp"
+        android:layout_height="23dp"
+        android:layout_gravity="center"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="420dp"
+        android:text="Action, Adventure, RPG"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toEndOf="@+id/gameImage"
+        app:layout_constraintTop_toBottomOf="@+id/gamePlatform"
+        app:layout_constraintVertical_bias="0.627" />
+
+    <TextView
+        android:id="@+id/gameName"
+        style="@style/TextColor"
+        android:layout_width="350dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="56dp"
+        android:text="1234567890123456789012345678901234567890123456789012345678"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gameMeta">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            tools:ignore="ExtraText">
+
+            <TextView
+                style="@style/TextColor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="Game Description"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/gDesc"
+                style="@style/TextColor"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                android:padding="16dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id pretium urna, in luctus lectus. Fusce laoreet rutrum aliquam. Suspendisse potenti. Integer tristique, leo ut mattis consectetur, purus odio fringilla dui, non consectetur lectus tellus et dui. Morbi rutrum nunc sed ipsum tempus tincidunt. Sed condimentum urna id scelerisque volutpat. Mauris id felis eros. Sed euismod pharetra diam, non tristique arcu iaculis at. Aliquam aliquet dolor id augue faucibus, non laoreet erat consequat. Mauris vehicula convallis rutrum. Mauris sed mauris auctor, varius lacus quis, bibendum lectus. Nam pharetra libero vitae semper consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin mattis volutpat sem vel congue. Sed viverra, est ut consectetur faucibus, est mauris porta mauris, eget placerat quam nunc et sem. Phasellus consectetur faucibus ullamcorper. Nulla nec viverra est, eu malesuada odio. ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id pretium urna, in luctus lectus. Fusce laoreet rutrum aliquam. Suspendisse potenti. Integer tristique, leo ut mattis consectetur, purus odio fringilla dui, non consectetur lectus tellus et dui. Morbi rutrum nunc sed ipsum tempus tincidunt. Sed condimentum urna id scelerisque volutpat. Mauris id felis eros. Sed euismod pharetra diam, non tristique arcu iaculis at. Aliquam aliquet dolor id augue faucibus, non laoreet erat consequat. Mauris vehicula convallis rutrum. Mauris sed mauris auctor, varius lacus quis, bibendum lectus. Nam pharetra libero vitae semper consectetur. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Proin mattis volutpat sem vel congue. Sed viverra, est ut consectetur faucibus, est mauris porta mauris, eget placerat quam nunc et sem. Phasellus consectetur faucibus ullamcorper. Nulla nec viverra est, eu malesuada odio." />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addComent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="384dp"
+        android:contentDescription="Add Comment"
+        android:src="@drawable/baseline_add_comment_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scrollView" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

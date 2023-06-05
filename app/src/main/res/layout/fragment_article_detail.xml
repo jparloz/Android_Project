@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    style="@style/ScreenBackground"
+    tools:context="com.example.project_android.UI.ArticleDetailFragment">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailUser"
+        android:layout_marginTop="14dp"
+        android:text="Pepe Viyuela"
+        android:textSize="20sp"
+        android:layout_gravity="center"
+        style="@style/TextColor"
+        android:layout_marginBottom="12dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/detailTitle"
+        android:layout_marginTop="14dp"
+        android:text="Game rate lo mejo"
+        android:textSize="24sp"
+        android:layout_gravity="center"
+        style="@style/TextColor"
+        android:layout_marginBottom="12dp"/>
+    <ImageView
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:id="@+id/detailImage"
+        android:padding="8dp"
+        android:layout_gravity="center"
+        android:src="@drawable/logo"
+        android:scaleType="centerCrop"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        style="@style/TextColor"
+        android:padding="20dp"
+        android:layout_gravity="center"
+        android:textSize="18sp"
+        android:id="@+id/detailDesc"/>
+</LinearLayout>
