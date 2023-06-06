@@ -1,23 +1,31 @@
 package com.example.project_android.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameDetail {
     String id, name,description, age_rating, release, background_image, meta_rating, playtime, rating;
     Developer developer = new Developer(" ");
+    List<Genres> genres = new ArrayList<>();
+    List<Platforms> platforms = new ArrayList<>();
 
     public GameDetail() {
 
     }
-    public GameDetail(String game_id, String name, Developer developer, String description, String age_rating, String release, String background_image, String rating, String meta_rating, String playtime) {
-        this.id =game_id;
+
+    public GameDetail(String id, String name, String description, String age_rating, String release, String background_image, String meta_rating, String playtime, String rating, Developer developer, List<Genres> genres, List<Platforms> platforms) {
+        this.id = id;
         this.name = name;
-        this.developer = developer;
         this.description = description;
         this.age_rating = age_rating;
         this.release = release;
         this.background_image = background_image;
-        this.rating = rating;
         this.meta_rating = meta_rating;
         this.playtime = playtime;
+        this.rating = rating;
+        this.developer = developer;
+        this.genres = genres;
+        this.platforms = platforms;
     }
 
     public String getId() {
@@ -100,19 +108,37 @@ public class GameDetail {
         this.playtime = playtime;
     }
 
+    public List<Genres> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<Genres> genres) {
+        this.genres = genres;
+    }
+
+    public List<Platforms> getPlatforms() {
+        return platforms;
+    }
+
+    public void setPlatforms(List<Platforms> platforms) {
+        this.platforms = platforms;
+    }
+
     @Override
     public String toString() {
         return "GameDetail{" +
-                "name='" + name + '\'' +
-                ", developer='" + developer + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", age_rating='" + age_rating + '\'' +
                 ", release='" + release + '\'' +
                 ", background_image='" + background_image + '\'' +
-                ", game_id=" + id +
-                ", meta_rating=" + meta_rating +
-                ", playtime=" + playtime +
-                ", rating=" + rating +
+                ", meta_rating='" + meta_rating + '\'' +
+                ", playtime='" + playtime + '\'' +
+                ", rating='" + rating + '\'' +
+                ", developer=" + developer +
+                ", genres=" + genres +
+                ", platforms=" + platforms +
                 '}';
     }
 }

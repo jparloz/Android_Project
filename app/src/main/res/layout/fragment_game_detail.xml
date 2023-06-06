@@ -56,8 +56,8 @@
     <TextView
         android:id="@+id/gamePlatform"
         style="@style/TextColor"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="158dp"
+        android:layout_height="81dp"
         android:layout_gravity="center"
         android:layout_marginEnd="56dp"
         android:layout_marginBottom="468dp"

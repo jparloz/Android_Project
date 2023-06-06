@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -25,7 +24,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_android.Response.DatabaseHandler;
-import com.example.project_android.Service.ApiService;
 import com.example.project_android.UI.ArticlesFragment;
 import com.example.project_android.UI.GamesFragment;
 import com.example.project_android.UI.HomeFragment;

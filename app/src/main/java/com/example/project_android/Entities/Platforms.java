@@ -1,21 +1,17 @@
 package com.example.project_android.Entities;
 
-public class Developer {
+public class Platforms {
 
     private String slug;
     private String name;
     private String createdAt;
     private String updatedAt;
 
-    public Developer(String slug, String name, String createdAt, String updatedAt) {
+    public Platforms(String slug, String name, String createdAt, String updatedAt) {
         this.slug = slug;
         this.name = name;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-    }
-
-    public Developer(String name) {
-        this.name = name;
     }
 
     public String getSlug() {
@@ -52,7 +48,7 @@ public class Developer {
 
     @Override
     public String toString() {
-        return "Developer{" +
+        return "Platforms{" +
                 "slug='" + slug + '\'' +
                 ", name='" + name + '\'' +
                 ", createdAt='" + createdAt + '\'' +

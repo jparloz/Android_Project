@@ -42,7 +42,7 @@ public class DatabaseHandler {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ApiService apiService;
-    String baseUrl = "https://9cbe-81-41-149-189.eu.ngrok.io/api/";//https:game-rate-production.up.railway.app/api/";
+    String baseUrl = "https://f3e3-81-41-149-189.eu.ngrok.io/api/";//https:game-rate-production.up.railway.app/api/";
     Retrofit retrofit;
 
 

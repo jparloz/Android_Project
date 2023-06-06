@@ -1,9 +1,12 @@
 package com.example.project_android.Adapters;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,21 +26,18 @@ import java.util.List;
 
 public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private MainActivity activity;
-    private List<GameDetail> Gdata;
-    private GameViewModel mgam;
+    private List<GameDetail> gameData;
+    private GameViewModel gameViewModel;
+    private boolean isLoading = false;
+    private int loadingPosition = -1;
+    private OnLoadMoreListener onLoadMoreListener;
 
     private static final int VIEW_TYPE_ITEM = 0;
     private static final int VIEW_TYPE_LOADING = 1;
-    private boolean isLoading = false;
-    private OnLoadMoreListener onLoadMoreListener;
 
-    public Games_Adapter(MainActivity activity, List<GameDetail> Gdata) {
+    public Games_Adapter(MainActivity activity, List<GameDetail> gameData) {
         this.activity = activity;
-        this.Gdata = Gdata;
-    }
-
-    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
-        this.onLoadMoreListener = onLoadMoreListener;
+        this.gameData = gameData;
     }
 
     @NonNull
@@ -45,86 +45,117 @@ public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_ITEM) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_item, parent, false);
-            return new MyViewHolderGame(view);
-        } else {
+            return new ItemViewHolder(view);
+        } else if (viewType == VIEW_TYPE_LOADING) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.loading_item, parent, false);
             return new LoadingViewHolder(view);
         }
+        return null;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof MyViewHolderGame) {
-            MyViewHolderGame itemHolder = (MyViewHolderGame) holder;
-            Picasso.get().load(Gdata.get(position).getBackground_image()).into(itemHolder.recImage);
-            itemHolder.recTitle.setText(Gdata.get(position).getName());
-            itemHolder.recUser.setText(String.valueOf(Gdata.get(position).getRating()));
+        if (holder instanceof ItemViewHolder) {
+
+            ItemViewHolder itemHolder = (ItemViewHolder) holder;
+
+            Picasso.get().load(gameData.get(position).getBackground_image()).resize(385,0).placeholder(com.denzcoskun.imageslider.R.drawable.loading).into(itemHolder.recImage);
+            itemHolder.recTitle.setText(gameData.get(position).getName());
+            itemHolder.recUser.setText(String.valueOf(gameData.get(position).getRating()));
             itemHolder.recCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    DatabaseHandler dH = new DatabaseHandler(activity);
-                    dH.getGameDetailHandle(Gdata.get(holder.getLayoutPosition()));
-
+                    DatabaseHandler databaseHandler = new DatabaseHandler(activity);
+                    databaseHandler.getGameDetailHandle(gameData.get(holder.getLayoutPosition()));
                     loadFragment(new GameDetailFragment());
                 }
             });
-        } else if (holder instanceof LoadingViewHolder) {
-            // Mostrar vista de carga
-        }
 
-        // Verificar si es el último elemento y no está cargando para activar la paginación
-        if (position == getItemCount() - 1 && !isLoading && onLoadMoreListener != null) {
-            isLoading = true;
-            onLoadMoreListener.onLoadMore();
+            if (position == 9) {
+                loadMoreData();
+            }
+        } else if (holder instanceof LoadingViewHolder) {
+            LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
+            loadingViewHolder.progressBar.setIndeterminate(true);
         }
     }
 
     @Override
     public int getItemCount() {
-        return Gdata.size();
+        return gameData.size();
     }
 
     @Override
     public int getItemViewType(int position) {
-        return Gdata.get(position) != null ? VIEW_TYPE_ITEM : VIEW_TYPE_LOADING;
+        return position == gameData.size() - 1 && isLoading ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+    }
+
+    public void setOnLoadMoreListener(OnLoadMoreListener onLoadMoreListener) {
+        this.onLoadMoreListener = onLoadMoreListener;
     }
 
     public void addNewData(List<GameDetail> newData) {
-        Gdata.addAll(newData);
+        gameData.addAll(newData);
         notifyDataSetChanged();
     }
 
-    public void setLoading(boolean loading) {
-        isLoading = loading;
+    public void showLoading() {
+        if (gameData.size() > 0 && !isLoading) {
+            isLoading = true;
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable() {
+                @Override
+                public void run() {
+                    gameData.add(null);
+                    notifyItemInserted(gameData.size() - 1);
+                }
+            });
+        }
+    }
+
+    public void hideLoading() {
+        if (isLoading && gameData.size() > 0 && gameData.get(gameData.size() - 1) == null) {
+            isLoading = false;
+            gameData.remove(gameData.size() - 1);
+            notifyItemRemoved(gameData.size());
+        }
+    }
+
+    private void loadMoreData() {
+        if (onLoadMoreListener != null) {
+            onLoadMoreListener.onLoadMore();
+        }
     }
 
     private void loadFragment(Fragment fragment) {
-        activity
-                .getSupportFragmentManager()
+        activity.getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.fragment_layout, fragment)
                 .addToBackStack(null)
                 .commit();
     }
 
-    private static class MyViewHolderGame extends RecyclerView.ViewHolder {
+    private static class ItemViewHolder extends RecyclerView.ViewHolder {
         private CardView recCard;
-        private ImageView recImage;
         private TextView recTitle;
         private TextView recUser;
+        private ImageView recImage;
 
-        private MyViewHolderGame(@NonNull View itemView) {
+        private ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            recCard = itemView.findViewById(R.id.recCard);
             recImage = itemView.findViewById(R.id.recImage);
+            recCard = itemView.findViewById(R.id.recCard);
             recTitle = itemView.findViewById(R.id.recTitle);
             recUser = itemView.findViewById(R.id.recUser);
         }
     }
 
     private static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        private ProgressBar progressBar;
+
         private LoadingViewHolder(@NonNull View itemView) {
             super(itemView);
+            progressBar = itemView.findViewById(R.id.progress_bar2);
         }
     }
 
@@ -132,4 +163,3 @@ public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         void onLoadMore();
     }
 }
-
