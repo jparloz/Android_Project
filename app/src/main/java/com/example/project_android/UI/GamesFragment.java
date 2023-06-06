@@ -10,18 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 
 import com.example.project_android.Adapters.GenreAdapter;
-import com.example.project_android.Entities.ArticleDetail;
 import com.example.project_android.Entities.GenreDetail;
 
-import com.example.project_android.MainActivity;
 import com.example.project_android.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class GamesFragment extends Fragment {
 

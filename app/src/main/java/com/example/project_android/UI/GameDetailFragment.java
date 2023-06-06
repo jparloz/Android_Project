@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.project_android.Entities.GameDetail;
+import com.example.project_android.Entities.Genres;
+import com.example.project_android.Entities.Platforms;
 import com.example.project_android.R;
 import com.example.project_android.ViewModel.GameViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+
+import okhttp3.internal.platform.Platform;
 
 
 public class GameDetailFragment extends Fragment {
@@ -49,23 +56,7 @@ public class GameDetailFragment extends Fragment {
         mgam = new ViewModelProvider(getActivity()).get(GameViewModel.class);
         GameDetail gd = mgam.getMyGame();
 
-        gameImage=getView().findViewById(R.id.gameImage);
-        gameName = getView().findViewById(R.id.gameName);
-        gameRating = getView().findViewById(R.id.gameRating);
-        gameMeta = getView().findViewById(R.id.gameMeta);
-        gameAge = getView().findViewById(R.id.gameAge);
-        gameRelease = getView().findViewById(R.id.gameRelease);
-        gamePlatform = getView().findViewById(R.id.gamePlatform);
-        gameGenres = getView().findViewById(R.id.gameGenres);
-        gamesDesc = getView().findViewById(R.id.gDesc);
-
-        Picasso.get().load(gd.getBackground_image()).into(gameImage);
-        gameName.setText(gd.getName());
-        gameRating.setText(gd.getRating() + "/5");
-        gameMeta.setText(gd.getMeta_rating()+"/100");
-        gameAge.setText(gd.getAge_rating());
-        gameRelease.setText(gd.getRelease());
-        gamesDesc.setText(gd.getDescription());
+        iniciateXML(gd);
 
         fab = getView().findViewById(R.id.addComent);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +73,41 @@ public class GameDetailFragment extends Fragment {
                 dialog.show();
             }
         });
+    }
+
+    private void iniciateXML(GameDetail gd) {
+        gameImage=getView().findViewById(R.id.gameImage);
+        gameName = getView().findViewById(R.id.gameName);
+        gameRating = getView().findViewById(R.id.gameRating);
+        gameMeta = getView().findViewById(R.id.gameMeta);
+        gameAge = getView().findViewById(R.id.gameAge);
+        gameRelease = getView().findViewById(R.id.gameRelease);
+        gamePlatform = getView().findViewById(R.id.gamePlatform);
+        gameGenres = getView().findViewById(R.id.gameGenres);
+        gamesDesc = getView().findViewById(R.id.gDesc);
+
+        Picasso.get().load(gd.getBackground_image()).into(gameImage);
+        gameName.setText(gd.getName());
+        gameRating.setText(gd.getRating() + "/5");
+        ArrayList<String> platformNames = new ArrayList<>();
+        if(gd.getPlatforms()!=null){
+            for (Platforms platform : gd.getPlatforms()) {
+                platformNames.add(platform.getName());
+            }
+            String concatenatedNames = TextUtils.join(", ", platformNames);
+            gamePlatform.setText(concatenatedNames);
+        }
+        if(gd.getGenres()!=null){
+            ArrayList<String> genreNames = new ArrayList<>();
+            for (Genres genre : gd.getGenres()) {
+                genreNames.add(genre.getName());
+            }
+            String concatenatedNames = TextUtils.join(", ", genreNames);
+            gameGenres.setText(concatenatedNames);
+        }
+        if(gd.getMeta_rating()!=null){gameMeta.setText(gd.getMeta_rating()+"/100");}
+        if(gd.getAge_rating()!=null){gameAge.setText(gd.getAge_rating());}
+        gameRelease.setText(gd.getRelease());
+        gamesDesc.setText(gd.getDescription());
     }
 }
