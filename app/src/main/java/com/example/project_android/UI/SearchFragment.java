@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,32 +24,23 @@ import com.example.project_android.MainActivity;
 import com.example.project_android.R;
 import com.example.project_android.Response.DatabaseHandler;
 import com.example.project_android.ViewModel.ListGamesGenreViewModel;
+import com.example.project_android.ViewModel.ListSearchGamesViewModel;
 
 import java.util.List;
 
-public class GenreGameFragment extends Fragment {
+public class SearchFragment extends Fragment {
     NestedScrollView nestedScrollView;
     Games_Adapter Gadapter;
-    ListGamesGenreViewModel myListGenreGame;
-    GameDetail gd;
-    DatabaseHandler dH;
+    ListSearchGamesViewModel myListSearchGame;
     RecyclerView rv;
-    TextView nr;
-    ImageView iv;
-    int image;
-    String name;
 
     int currentPage = 1;
-    int visibleThreshold = 9; // Cuando estés en la posición 9, cargarás la siguiente página
+    int visibleThreshold = 9;
     int lastVisibleItem, totalItemCount;
     boolean loading = false;
 
-    public GenreGameFragment() {
+    public SearchFragment() {
 
-    }
-    public GenreGameFragment(int image, String name) {
-        this.image=image;
-        this.name=name;
     }
 
     @Override
@@ -60,7 +50,7 @@ public class GenreGameFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_genre_game, container, false);
+        return inflater.inflate(R.layout.fragment_search, container, false);
     }
 
     @Override
@@ -76,26 +66,16 @@ public class GenreGameFragment extends Fragment {
     }
 
     private void loadXML() {
-        String fileName= getResources().getResourceName(image);
-        fileName = fileName.substring(42,fileName.length());
 
-        myListGenreGame = new ViewModelProvider(getActivity()).get(ListGamesGenreViewModel.class);
-
-        dH = new DatabaseHandler((MainActivity) getActivity());
-        dH.getGameByGenreHandle(fileName);
-
+        myListSearchGame = new ViewModelProvider(getActivity()).get(ListSearchGamesViewModel.class);
         nestedScrollView = getView().findViewById(R.id.scrollView);
         rv = getView().findViewById(R.id.recyclerViewGame);
-        iv = getView().findViewById(R.id.imageResult);
-        iv.setImageResource(image);
-        nr = getView().findViewById(R.id.nameResult);
-        nr.setText(name);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 1);
         rv.setLayoutManager(gridLayoutManager);
 
 
-        myListGenreGame.getMyListGenreGame().observe(this, new Observer<List<GameDetail>>() {
+        myListSearchGame.getMyListGame().observe(this, new Observer<List<GameDetail>>() {
             @Override
             public void onChanged(List<GameDetail> gameDetails) {
                 List<GameDetail> initialData;
@@ -143,10 +123,10 @@ public class GenreGameFragment extends Fragment {
 
     private void loadMoreData(List<GameDetail> gameDetails) {
         int startIndex = (currentPage - 1) * 10;
-        int endIndex = startIndex + 10;
+        int endIndex = Math.min(startIndex + 10, gameDetails.size());
 
-        if (endIndex > gameDetails.size()) {
-            // Si endIndex excede el tamaño de gameDetails, no hay más datos para cargar
+        if (endIndex <= startIndex) {
+            // No hay más datos para cargar
             Gadapter.hideLoading();
             loading = false;
             return;
@@ -164,5 +144,5 @@ public class GenreGameFragment extends Fragment {
             }
         }, 5000);
     }
-
 }
+

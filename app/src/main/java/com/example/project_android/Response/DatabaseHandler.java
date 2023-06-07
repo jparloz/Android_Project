@@ -15,10 +15,13 @@ import com.example.project_android.MainActivity;
 import com.example.project_android.R;
 import com.example.project_android.Service.ApiService;
 import com.example.project_android.UI.GameDetailFragment;
+import com.example.project_android.UI.GenreGameFragment;
+import com.example.project_android.UI.SearchFragment;
 import com.example.project_android.ViewModel.GameViewModel;
 import com.example.project_android.ViewModel.ListCommentViewModel;
 import com.example.project_android.ViewModel.ListGameViewModel;
 import com.example.project_android.ViewModel.ListGamesGenreViewModel;
+import com.example.project_android.ViewModel.ListSearchGamesViewModel;
 import com.example.project_android.ViewModel.ListTopGamesViewModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -39,10 +42,11 @@ public class DatabaseHandler {
     ListTopGamesViewModel myListTopGame;
     ListCommentViewModel myListComment;
     ListGameViewModel myListGame;
+    ListSearchGamesViewModel mySearchGame;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ApiService apiService;
-    String baseUrl = "https://1cf4-81-41-149-189.eu.ngrok.io/api/";//https:game-rate-production.up.railway.app/api/";
+    String baseUrl = "http://10.0.2.2:8089/api/";//"https://game-rate-production.up.railway.app/api/";
     Retrofit retrofit;
 
 
@@ -345,7 +349,37 @@ public class DatabaseHandler {
                 Log.d("ERROR", "FALLA AL LLAMAR");
             }
         });
+
     }
+    public void getSearchGameHandler(String name) {
+
+        mySearchGame = new ViewModelProvider(activity).get(ListSearchGamesViewModel.class);
+        Call<List<GameDetail>> call = apiService.searchGames(name);
+
+        call.enqueue(new Callback<List<GameDetail>>() {
+            @Override
+            public void onResponse(Call<List<GameDetail>> call, Response<List<GameDetail>> response) {
+
+                if (response.isSuccessful()) {
+                    mySearchGame.getMyListGame();
+                    mySearchGame.setMyListGame(response.body());
+                    loadFragment(new SearchFragment());
+
+                } else {
+                    Log.d("ERROR", response.message());
+                    Log.d("ERROR", "FALLA AL LLEGAR, LA LLAMADA SE REALIZA");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GameDetail>> call, Throwable t) {
+                Toast.makeText(activity, "You already have a comment on this game", Toast.LENGTH_SHORT).show();
+                t.printStackTrace();
+                Log.d("ERROR", "FALLA AL LLAMAR");
+            }
+        });
+    }
+
 
     private void loadFragment(Fragment fragmento){
         activity

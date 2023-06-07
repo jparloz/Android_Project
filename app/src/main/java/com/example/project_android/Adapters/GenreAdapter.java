@@ -8,9 +8,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.project_android.Entities.GameDetail;
 import com.example.project_android.Entities.GenreDetail;
 import com.example.project_android.MainActivity;
 import com.example.project_android.R;
@@ -35,4 +38,6 @@ public class GenreAdapter extends ArrayAdapter<GenreDetail> {
 
             return view;
         }
+
+
 }

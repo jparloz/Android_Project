@@ -64,12 +64,7 @@ public interface ApiService {
             @Field("rating") String rating
 
     );
-    @GET("games")
-    Call<List<GameDetail>> getGames(
-            @Query("page") int page,
-            @Query("limit") int limit
-    );
-    @GET("games/{game_id}")
+    @GET("search-game")
     Call<GameDetail> getGame(
             @Path("game_id") String game_id
     );
@@ -84,6 +79,10 @@ public interface ApiService {
     @GET("games/genre/{genre}")
     Call<List<GameDetail>> getGamesByGenre(
             @Path("genre") String genre
+    );
+    @GET("search-game")
+    Call<List<GameDetail>> searchGames(
+            @Query("name") String name
     );
     @GET("reviews/random")
     Call<List<ArticleDetail>> getRandomReviews(

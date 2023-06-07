@@ -14,13 +14,16 @@ import android.widget.ListView;
 
 import com.example.project_android.Adapters.GenreAdapter;
 import com.example.project_android.Entities.GenreDetail;
-
+import com.example.project_android.MainActivity;
 import com.example.project_android.R;
+import com.example.project_android.Response.DatabaseHandler;
 
 import java.util.ArrayList;
 
+
 public class GamesFragment extends Fragment {
 
+    DatabaseHandler dH;
     GenreAdapter genreAdapter;
     ArrayList<GenreDetail> dataArrayList = new ArrayList<>();
     GenreDetail genreDetail;
@@ -55,11 +58,12 @@ public class GamesFragment extends Fragment {
         sv.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                searchList(query);
                 return false;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                //searchList(newText);
+
                 return true;
             }
         });
@@ -75,6 +79,12 @@ public class GamesFragment extends Fragment {
         });
 
     }
+
+    private void searchList(String newText) {
+        dH = new DatabaseHandler((MainActivity)getActivity());
+        dH.getSearchGameHandler(newText);
+    }
+
     private void loadFragment(Fragment fragmento){
         getActivity()
                 .getSupportFragmentManager()
@@ -82,17 +92,5 @@ public class GamesFragment extends Fragment {
                 .replace(R.id.fragment_layout,fragmento)
                 .commit();
     }
-   /* private void searchList(String text) {
-        List<ArticleDetail> dataSearchList = new ArrayList<>();
-        for (ArticleDetail data : Adata){
-            if (data.getDataTitle().toLowerCase().contains(text.toLowerCase())) {
-                dataSearchList.add(data);
-            }
-        }
-        if (dataSearchList.isEmpty()){
-            Toast.makeText((MainActivity)this.getActivity(), "Not Found", Toast.LENGTH_SHORT).show();
-        } else {
-            //Aadapter.setSearchList(dataSearchList);
-        }
-    }*/
+
 }

@@ -19,7 +19,6 @@ import com.example.project_android.MainActivity;
 import com.example.project_android.R;
 import com.example.project_android.Response.DatabaseHandler;
 import com.example.project_android.UI.GameDetailFragment;
-import com.example.project_android.ViewModel.GameViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -27,11 +26,11 @@ import java.util.List;
 public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private MainActivity activity;
     private List<GameDetail> gameData;
-    private GameViewModel gameViewModel;
     private boolean isLoading = false;
     private int loadingPosition = -1;
     private OnLoadMoreListener onLoadMoreListener;
 
+    private boolean showLoadingProgress = false;
     private static final int VIEW_TYPE_ITEM = 0;
     private static final int VIEW_TYPE_LOADING = 1;
 
@@ -76,7 +75,11 @@ public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             }
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
-            loadingViewHolder.progressBar.setIndeterminate(true);
+            if (showLoadingProgress) {
+                loadingViewHolder.progressBar.setVisibility(View.VISIBLE);
+            } else {
+                loadingViewHolder.progressBar.setVisibility(View.GONE);
+            }
         }
     }
 
@@ -100,23 +103,15 @@ public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public void showLoading() {
-        if (gameData.size() > 0 && !isLoading) {
-            isLoading = true;
-            Handler handler = new Handler(Looper.getMainLooper());
-            handler.post(new Runnable() {
-                @Override
-                public void run() {
-                    gameData.add(null);
-                    notifyItemInserted(gameData.size() - 1);
-                }
-            });
+        if (!showLoadingProgress) {
+            showLoadingProgress = true;
+            notifyItemInserted(gameData.size());
         }
     }
 
     public void hideLoading() {
-        if (isLoading && gameData.size() > 0 && gameData.get(gameData.size() - 1) == null) {
-            isLoading = false;
-            gameData.remove(gameData.size() - 1);
+        if (showLoadingProgress) {
+            showLoadingProgress = false;
             notifyItemRemoved(gameData.size());
         }
     }
