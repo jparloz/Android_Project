@@ -8,16 +8,21 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.project_android.Entities.GameDetail;
 import com.example.project_android.Entities.Genres;
 import com.example.project_android.Entities.Platforms;
+import com.example.project_android.MainActivity;
 import com.example.project_android.R;
+import com.example.project_android.Response.DatabaseHandler;
 import com.example.project_android.ViewModel.GameViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.squareup.picasso.Picasso;
@@ -30,9 +35,11 @@ import okhttp3.internal.platform.Platform;
 public class GameDetailFragment extends Fragment {
 
     GameViewModel mgam;
-    TextView gameName, gameDev, gameRating, gameMeta, gameAge,gameRelease, gamePlatform, gameGenres, gamesDesc;
+    TextView gameName, gameRating, gameMeta, gameAge,gameRelease, gamePlatform, gameGenres, gamesDesc;
     ImageView gameImage;
     FloatingActionButton fab;
+
+    DatabaseHandler dH;
 
     public GameDetailFragment() {
 
@@ -52,6 +59,7 @@ public class GameDetailFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        dH = new DatabaseHandler((MainActivity) getActivity());
 
         mgam = new ViewModelProvider(getActivity()).get(GameViewModel.class);
         GameDetail gd = mgam.getMyGame();
@@ -71,6 +79,17 @@ public class GameDetailFragment extends Fragment {
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
                 dialog.show();
+                EditText rating = dialogView.findViewById(R.id.ratingBox);
+                EditText comment = dialogView.findViewById(R.id.commentBox);
+                Button btn = dialogView.findViewById(R.id.btnSubmit);
+
+                btn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dH.commentHandler(gd.getId(),comment.getText().toString(), rating.getText().toString());
+                        dialog.hide();
+                    }
+                });
             }
         });
     }

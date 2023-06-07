@@ -4,6 +4,7 @@ import com.example.project_android.Entities.ArticleDetail;
 import com.example.project_android.Entities.CommentDetail;
 import com.example.project_android.Entities.GameDetail;
 import com.example.project_android.Entities.User;
+import com.example.project_android.Response.CommentResponse;
 import com.example.project_android.Response.LoginResponse;
 import com.example.project_android.Response.RegisterResponse;
 import com.example.project_android.Response.UpdatePasswordResponse;
@@ -53,6 +54,15 @@ public interface ApiService {
     @GET("users/{userId}/comments")
     Call<List<CommentDetail>> getCommentsByUser(
             @Path("userId") String userId
+    );
+    @FormUrlEncoded
+    @POST("comments")
+    Call<CommentResponse> comment(
+            @Field("user_id") String user_id,
+            @Field("game_id") String game_id,
+            @Field("comment") String comment,
+            @Field("rating") String rating
+
     );
     @GET("games")
     Call<List<GameDetail>> getGames(

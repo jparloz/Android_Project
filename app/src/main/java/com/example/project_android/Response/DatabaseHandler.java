@@ -42,7 +42,7 @@ public class DatabaseHandler {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ApiService apiService;
-    String baseUrl = "https://f3e3-81-41-149-189.eu.ngrok.io/api/";//https:game-rate-production.up.railway.app/api/";
+    String baseUrl = "https://1cf4-81-41-149-189.eu.ngrok.io/api/";//https:game-rate-production.up.railway.app/api/";
     Retrofit retrofit;
 
 
@@ -317,6 +317,30 @@ public class DatabaseHandler {
 
             @Override
             public void onFailure(Call<List<GameDetail>> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("ERROR", "FALLA AL LLAMAR");
+            }
+        });
+    }
+
+    public void commentHandler(String game_id, String comment, String rating){
+
+        sharedPreferences = activity.getSharedPreferences("MODE", Context.MODE_PRIVATE);
+        Call<CommentResponse> call = apiService.comment(sharedPreferences.getString("user_id"," "),game_id,comment,rating);
+        call.enqueue(new Callback<CommentResponse>() {
+            @Override
+            public void onResponse(Call<CommentResponse> call, Response<CommentResponse> response) {
+
+                if (response.isSuccessful()) {
+                    Toast.makeText(activity, "Comment completed successfully", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d("ERROR", response.message());
+                    Log.d("ERROR", "FALLA AL LLEGAR, LA LLAMADA SE REALIZA");
+                }
+            }
+            @Override
+            public void onFailure(Call<CommentResponse> call, Throwable t) {
+                Toast.makeText(activity, "You already have a comment on this game", Toast.LENGTH_SHORT).show();
                 t.printStackTrace();
                 Log.d("ERROR", "FALLA AL LLAMAR");
             }

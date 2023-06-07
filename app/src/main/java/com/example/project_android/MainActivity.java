@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     isLoggedIn = true;
                     loadMainContent();
                 } else {
-                    Toast.makeText(MainActivity.this, "Inicio de sesión fallido", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -66,6 +66,8 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="192dp"
             android:maxLength="3"
+            android:inputType="number"
+            android:digits="0123456789"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
