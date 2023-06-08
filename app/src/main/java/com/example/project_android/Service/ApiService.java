@@ -64,8 +64,12 @@ public interface ApiService {
             @Field("rating") String rating
 
     );
-    @GET("search-game")
+    @GET("games/{game}")
     Call<GameDetail> getGame(
+            @Path("game") String gameId
+    );
+    @GET("search-game")
+    Call<List<GameDetail>> getSearchGame(
             @Path("game_id") String game_id
     );
     @GET("games/random")

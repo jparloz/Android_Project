@@ -354,7 +354,7 @@ public class DatabaseHandler {
     public void getSearchGameHandler(String name) {
 
         mySearchGame = new ViewModelProvider(activity).get(ListSearchGamesViewModel.class);
-        Call<List<GameDetail>> call = apiService.searchGames(name);
+        Call<List<GameDetail>> call = apiService.getSearchGame(name);
 
         call.enqueue(new Callback<List<GameDetail>>() {
             @Override

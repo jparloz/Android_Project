@@ -66,7 +66,6 @@ public class Games_Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 public void onClick(View view) {
                     DatabaseHandler databaseHandler = new DatabaseHandler(activity);
                     databaseHandler.getGameDetailHandle(gameData.get(holder.getLayoutPosition()));
-                    loadFragment(new GameDetailFragment());
                 }
             });
 
