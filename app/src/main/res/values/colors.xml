@@ -5,8 +5,9 @@
     <color name="TopBar">#500EA7</color>
     <color name="bck">#545454</color>
     <color name="cv_back">#5E477C</color>
-    <color name="grey">#2E2E2E</color>
-    <color name="night">#FF424242</color>
-    <color name="typeNight">#2B085C</color>
+    <color name="grey">#333333</color>
+    <color name="night">#AAAAAA</color>
+    <color name="typeNight">#4C3964</color>
+    <color name="prueba">#9864DC</color>
 
 </resources>

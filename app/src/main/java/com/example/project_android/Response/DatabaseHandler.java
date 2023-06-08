@@ -46,7 +46,7 @@ public class DatabaseHandler {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ApiService apiService;
-    String baseUrl = "http://10.0.2.2:8089/api/";//"https://game-rate-production.up.railway.app/api/";
+    String baseUrl = "https://game-rate-production.up.railway.app/api/";
     Retrofit retrofit;
 
 

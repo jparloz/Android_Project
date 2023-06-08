@@ -102,7 +102,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/first"
-                    app:tint="@color/cv_back"/>
+                    app:tint="@color/typeNight"/>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -138,7 +138,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/second"
-                    app:tint="@color/cv_back"/>
+                    app:tint="@color/typeNight"/>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -174,7 +174,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/third"
-                    app:tint="@color/cv_back"/>
+                    app:tint="@color/typeNight"/>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -208,7 +208,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/fourth"
-                    app:tint="@color/cv_back"/>
+                    app:tint="@color/typeNight"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -243,7 +243,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/fifth"
-                    app:tint="@color/cv_back"/>
+                    app:tint="@color/typeNight"/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -278,7 +278,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/sixth"
-                    app:tint="@color/cv_back"/>
+                    app:tint="@color/typeNight"/>
 
                 <TextView
                     android:id="@+id/textView6"

@@ -142,7 +142,7 @@ public class SearchFragment extends Fragment {
                 Gadapter.hideLoading();
                 loading = false;
             }
-        }, 5000);
+        }, 3000);
     }
 }
 
