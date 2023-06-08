@@ -59,14 +59,14 @@
         android:layout_width="158dp"
         android:layout_height="81dp"
         android:layout_gravity="center"
-        android:layout_marginEnd="56dp"
+        android:layout_marginEnd="64dp"
         android:layout_marginBottom="468dp"
         android:text="PS5, PS4, XBOX ONE, Pc"
         android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gameImage"
-        app:layout_constraintVertical_bias="0.773" />
+        app:layout_constraintVertical_bias="0.857" />
 
     <TextView
         android:id="@+id/gameAge"
@@ -90,13 +90,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="28dp"
+        android:layout_marginStart="24dp"
         android:text="25/02/2022"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/gamePlatform"
         app:layout_constraintStart_toEndOf="@+id/gameImage"
         app:layout_constraintTop_toTopOf="@+id/gameImage"
-        app:layout_constraintVertical_bias="0.567" />
+        app:layout_constraintVertical_bias="0.555" />
 
     <TextView
         android:id="@+id/gameGenres"
@@ -104,12 +104,12 @@
         android:layout_width="160dp"
         android:layout_height="23dp"
         android:layout_gravity="center"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="60dp"
         android:text="Action, Adventure, RPG"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/gameName" />
+        app:layout_constraintTop_toTopOf="@+id/gameImage" />
 
     <TextView
         android:id="@+id/gameName"

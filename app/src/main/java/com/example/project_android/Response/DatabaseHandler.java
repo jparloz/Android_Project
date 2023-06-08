@@ -48,7 +48,7 @@ public class DatabaseHandler {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ApiService apiService;
-    String baseUrl ="http://10.0.2.2:8089/api/";//"https://game-rate-production.up.railway.app/api/";
+    String baseUrl = "https://game-rate-production.up.railway.app/api/";
     Retrofit retrofit;
 
 
@@ -339,6 +339,7 @@ public class DatabaseHandler {
 
                 if (response.isSuccessful()) {
                     Toast.makeText(activity, "Comment completed successfully", Toast.LENGTH_SHORT).show();
+                    getCommentsWithUserHandle(game_id);
                 } else {
                     Log.d("ERROR", response.message());
                     Log.d("ERROR", "FALLA AL LLEGAR, LA LLAMADA SE REALIZA");

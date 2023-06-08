@@ -48,7 +48,12 @@ public class ListCommentAdapter extends RecyclerView.Adapter<MyViewHolderCom> {
     public int getItemCount() {
         return Cdata.size();
     }
+
+    public void notifyDataChanged() {
+        notifyDataSetChanged();
+    }
 }
+
 class MyViewHolderCom extends RecyclerView.ViewHolder{
     TextView recGameTitle, recComment, recRating;
     CardView recCard;

@@ -57,43 +57,45 @@ public class CommentsFragment extends Fragment {
         public void onStart() {
             super.onStart();
 
+            dH = new DatabaseHandler((MainActivity) getActivity());
+
             rv = getView().findViewById(R.id.recyclerViewComment);
 
             GridLayoutManager gridLayoutManager = new GridLayoutManager(this.getContext(), 1);
             rv.setLayoutManager(gridLayoutManager);
 
             Cdata = new ViewModelProvider(getActivity()).get(ListCommentViewModel.class);
+            CardView cv = getView().findViewById(R.id.cardTitle);
 
             Cdata.getMyListComment().observe(this, new Observer<List<Comment>>() {
                 @Override
                 public void onChanged(List<Comment> commentDetails) {
                     Cadapter = new ListCommentAdapter((MainActivity) getActivity(), commentDetails);
                     rv.setAdapter(Cadapter);
-                }
-            });
 
-            CardView cv = getView().findViewById(R.id.cardTitle);
-            cv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    View dialogView = getLayoutInflater().inflate(R.layout.dialog_comment, null);
-
-                    builder.setView(dialogView);
-                    AlertDialog dialog = builder.create();
-                    if (dialog.getWindow() != null){
-                        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                    }
-                    dialog.show();
-                    EditText rating = dialogView.findViewById(R.id.ratingBox);
-                    EditText comment = dialogView.findViewById(R.id.commentBox);
-                    Button btn = dialogView.findViewById(R.id.btnSubmit);
-
-                    btn.setOnClickListener(new View.OnClickListener() {
+                    cv.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dH.commentHandler(game_id ,comment.getText().toString(), rating.getText().toString());
-                            dialog.hide();
+                            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                            View dialogView = getLayoutInflater().inflate(R.layout.dialog_comment, null);
+
+                            builder.setView(dialogView);
+                            AlertDialog dialog = builder.create();
+                            if (dialog.getWindow() != null){
+                                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
+                            }
+                            dialog.show();
+                            EditText rating = dialogView.findViewById(R.id.ratingBox);
+                            EditText comment = dialogView.findViewById(R.id.commentBox);
+                            Button btn = dialogView.findViewById(R.id.btnSubmit);
+
+                            btn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    dH.commentHandler(game_id ,comment.getText().toString(), rating.getText().toString());
+                                    dialog.hide();
+                                }
+                            });
                         }
                     });
                 }
