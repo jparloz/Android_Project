@@ -70,11 +70,9 @@
 
     <GridLayout
         android:id="@+id/gridLayout"
-        android:layout_width="402dp"
-        android:layout_height="560dp"
-        android:layout_marginStart="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="600dp"
         android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
         android:layout_marginBottom="80dp"
         android:columnCount="3"
         android:rowCount="2">
@@ -102,7 +100,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/first"
-                    app:tint="@color/typeNight"/>
+                    app:tint="@color/cv_back"/>
 
                 <TextView
                     android:id="@+id/textView1"
@@ -138,7 +136,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/second"
-                    app:tint="@color/typeNight"/>
+                    app:tint="@color/cv_back"/>
 
                 <TextView
                     android:id="@+id/textView2"
@@ -174,7 +172,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/third"
-                    app:tint="@color/typeNight"/>
+                    app:tint="@color/cv_back"/>
 
                 <TextView
                     android:id="@+id/textView3"
@@ -208,7 +206,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/fourth"
-                    app:tint="@color/typeNight"/>
+                    app:tint="@color/cv_back"/>
 
                 <TextView
                     android:id="@+id/textView4"
@@ -243,7 +241,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/fifth"
-                    app:tint="@color/typeNight"/>
+                    app:tint="@color/cv_back"/>
 
                 <TextView
                     android:id="@+id/textView5"
@@ -278,7 +276,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/sixth"
-                    app:tint="@color/typeNight"/>
+                    app:tint="@color/cv_back"/>
 
                 <TextView
                     android:id="@+id/textView6"

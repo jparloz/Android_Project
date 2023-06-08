@@ -69,27 +69,8 @@ public class GameDetailFragment extends Fragment {
         fab = getView().findViewById(R.id.addComent);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View dialogView = getLayoutInflater().inflate(R.layout.dialog_comment, null);
-
-                builder.setView(dialogView);
-                AlertDialog dialog = builder.create();
-                if (dialog.getWindow() != null){
-                    dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-                }
-                dialog.show();
-                EditText rating = dialogView.findViewById(R.id.ratingBox);
-                EditText comment = dialogView.findViewById(R.id.commentBox);
-                Button btn = dialogView.findViewById(R.id.btnSubmit);
-
-                btn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dH.commentHandler(gd.getId(),comment.getText().toString(), rating.getText().toString());
-                        dialog.hide();
-                    }
-                });
+            public void onClick(View v) {
+                dH.getCommentsWithUserHandle(gd.getId());
             }
         });
     }

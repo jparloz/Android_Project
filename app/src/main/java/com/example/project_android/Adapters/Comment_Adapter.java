@@ -40,6 +40,7 @@ public class Comment_Adapter extends RecyclerView.Adapter<MyViewHolderComment> {
         holder.recComment.setText(Cdata.get(position).getComment());
         holder.recRating.setText(Cdata.get(position).getRating());
         holder.recGameTitle.setText(Cdata.get(position).getGameTitle());
+
         holder.recCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

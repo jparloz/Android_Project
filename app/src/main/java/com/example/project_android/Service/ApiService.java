@@ -1,6 +1,7 @@
 package com.example.project_android.Service;
 
 import com.example.project_android.Entities.ArticleDetail;
+import com.example.project_android.Entities.Comment;
 import com.example.project_android.Entities.CommentDetail;
 import com.example.project_android.Entities.GameDetail;
 import com.example.project_android.Entities.User;
@@ -84,9 +85,9 @@ public interface ApiService {
     Call<List<GameDetail>> getGamesByGenre(
             @Path("genre") String genre
     );
-    @GET("search-game")
-    Call<List<GameDetail>> searchGames(
-            @Query("name") String name
+    @GET("games/{game}/comments")
+    Call<List<Comment>> getCommentsWithUser(
+            @Path("game") String gameId
     );
     @GET("reviews/random")
     Call<List<ArticleDetail>> getRandomReviews(

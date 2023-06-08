@@ -8,16 +8,18 @@ import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.project_android.Entities.Comment;
 import com.example.project_android.Entities.CommentDetail;
 import com.example.project_android.Entities.GameDetail;
 import com.example.project_android.Entities.User;
 import com.example.project_android.MainActivity;
 import com.example.project_android.R;
 import com.example.project_android.Service.ApiService;
+import com.example.project_android.UI.CommentsFragment;
 import com.example.project_android.UI.GameDetailFragment;
-import com.example.project_android.UI.GenreGameFragment;
 import com.example.project_android.UI.SearchFragment;
 import com.example.project_android.ViewModel.GameViewModel;
+import com.example.project_android.ViewModel.ListCommentUserViewModel;
 import com.example.project_android.ViewModel.ListCommentViewModel;
 import com.example.project_android.ViewModel.ListGameViewModel;
 import com.example.project_android.ViewModel.ListGamesGenreViewModel;
@@ -40,13 +42,13 @@ public class DatabaseHandler {
     GameViewModel myGameDetail;
     ListGamesGenreViewModel myListGenreGame;
     ListTopGamesViewModel myListTopGame;
-    ListCommentViewModel myListComment;
+    ListCommentUserViewModel myListComment;
     ListGameViewModel myListGame;
     ListSearchGamesViewModel mySearchGame;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
     ApiService apiService;
-    String baseUrl = "https://game-rate-production.up.railway.app/api/";
+    String baseUrl ="http://10.0.2.2:8089/api/";//"https://game-rate-production.up.railway.app/api/";
     Retrofit retrofit;
 
 
@@ -186,7 +188,7 @@ public class DatabaseHandler {
 
     public void getCommentsByUserHandler() {
         sharedPreferences = activity.getSharedPreferences("MODE", Context.MODE_PRIVATE);
-        myListComment = new ViewModelProvider(activity).get(ListCommentViewModel.class);
+        myListComment = new ViewModelProvider(activity).get(ListCommentUserViewModel.class);
         Call<List<CommentDetail>> call = apiService.getCommentsByUser(sharedPreferences.getString("user_id", " "));
         call.enqueue(new Callback<List<CommentDetail>>() {
             @Override
@@ -214,7 +216,7 @@ public class DatabaseHandler {
         acComment.setComment(comment);
         acComment.setRating(rating);
 
-        myListComment = new ViewModelProvider(activity).get(ListCommentViewModel.class);
+        myListComment = new ViewModelProvider(activity).get(ListCommentUserViewModel.class);
 
         Call<CommentDetail> call = apiService.updateComment(acComment.getComment_id(),acComment);
         call.enqueue(new Callback<CommentDetail>() {
@@ -379,6 +381,30 @@ public class DatabaseHandler {
             }
         });
     }
+    public void getCommentsWithUserHandle(String game_id) {
+        ListCommentViewModel myListComment = new ViewModelProvider(activity).get(ListCommentViewModel.class);
+        Call<List<Comment>> call = apiService.getCommentsWithUser(game_id);
+        call.enqueue(new Callback<List<Comment>>() {
+            @Override
+            public void onResponse(Call<List<Comment>> call, Response<List<Comment>>response) {
+                if (response.isSuccessful()) {
+                    myListComment.setMyListComment(response.body());
+                    loadFragment(new CommentsFragment(game_id));
+                } else {
+                    Log.d("ERROR", response.message());
+                    Log.d("ERROR", "FALLA AL LLEGAR, LA LLAMADA SE REALIZA");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Comment>> call, Throwable t) {
+                t.printStackTrace();
+                Log.d("ERROR", "FALLA AL " +
+                        "LLAMAR");
+            }
+        });
+    }
+
 
 
     private void loadFragment(Fragment fragmento){

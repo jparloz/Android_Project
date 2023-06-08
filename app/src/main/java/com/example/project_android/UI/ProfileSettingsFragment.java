@@ -14,23 +14,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.project_android.Adapters.Articles_Adapter;
 import com.example.project_android.Adapters.Comment_Adapter;
-import com.example.project_android.Entities.ArticleDetail;
 import com.example.project_android.Entities.CommentDetail;
 import com.example.project_android.MainActivity;
 import com.example.project_android.R;
 import com.example.project_android.Response.DatabaseHandler;
-import com.example.project_android.ViewModel.ListCommentViewModel;
+import com.example.project_android.ViewModel.ListCommentUserViewModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProfileSettingsFragment extends Fragment {
@@ -43,7 +39,7 @@ public class ProfileSettingsFragment extends Fragment {
     RecyclerView rv;
 
     CardView cv_edit, cv_update;
-    ListCommentViewModel myListComment;
+    ListCommentUserViewModel myListComment;
 
     public ProfileSettingsFragment() {
 
@@ -63,7 +59,7 @@ public class ProfileSettingsFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        myListComment = new ViewModelProvider(getActivity()).get(ListCommentViewModel.class);
+        myListComment = new ViewModelProvider(getActivity()).get(ListCommentUserViewModel.class);
         dH = new DatabaseHandler((MainActivity) getActivity());
         dH.getCommentsByUserHandler();
         myListComment.getMyListComment().observe(this, new Observer<List<CommentDetail>>() {
