@@ -71,7 +71,7 @@ public interface ApiService {
     );
     @GET("search-game")
     Call<List<GameDetail>> getSearchGame(
-            @Path("game_id") String game_id
+            @Query("name") String name
     );
     @GET("games/random")
     Call<List<GameDetail>> getRandomGames(
