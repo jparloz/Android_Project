@@ -74,6 +74,10 @@ public class GamesFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                dH = new DatabaseHandler((MainActivity) getActivity());
+                dH.getGameByGenreHandle(String.valueOf(position+1));
+
                 loadFragment(new GenreGameFragment(imageList[position],nameList[position]));
             }
         });

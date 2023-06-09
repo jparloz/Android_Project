@@ -26,6 +26,7 @@ import com.example.project_android.R;
 import com.example.project_android.Response.DatabaseHandler;
 import com.example.project_android.ViewModel.ListGamesGenreViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GenreGameFragment extends Fragment {
@@ -80,9 +81,6 @@ public class GenreGameFragment extends Fragment {
         fileName = fileName.substring(42,fileName.length());
 
         myListGenreGame = new ViewModelProvider(getActivity()).get(ListGamesGenreViewModel.class);
-
-        dH = new DatabaseHandler((MainActivity) getActivity());
-        dH.getGameByGenreHandle(fileName);
 
         nestedScrollView = getView().findViewById(R.id.scrollView);
         rv = getView().findViewById(R.id.recyclerViewGame);
@@ -163,6 +161,12 @@ public class GenreGameFragment extends Fragment {
                 loading = false;
             }
         }, 3000);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        myListGenreGame.setMyListGenreGame(new ArrayList<>());
     }
 
 }
